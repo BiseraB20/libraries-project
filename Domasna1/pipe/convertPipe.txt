@@ -1,0 +1,1 @@
+osmfilter mac.osm --keep="amenity=library" --keep="amenity_1=reading room" --ignore-dependencies |osmconvert64.exe - --all-to-nodes --csv="@id @lat @lon name" --csv-headline --csv-separator="," -o="test.csv"
