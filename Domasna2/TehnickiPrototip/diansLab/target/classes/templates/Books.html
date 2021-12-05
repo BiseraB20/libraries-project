@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Books</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+    <style>
+        body{
+            font-family: Arial;
+            margin-top: 2%;
+            background-image: url(images/pozadina.jpg);
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: 100% 100%;
+        }
+        .nav-bar{
+            font-size: 23px;
+            padding: 10px;
+            color: white;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+
+<nav >
+    <div style="display: inline-block; width: 100%">
+        <div>
+            <a href="/home" style="margin-left: 2%; float: left"><img style="border-radius: 10px" src="images\logoLink.jpg"></a>
+        </div>
+        <!-- na taa strana sto e selektirana   border-style: solid; border-color: black-->
+        <div style=" float: right; background-color: grey; padding: 2%; width: 50%; margin-right: 5%; border-radius: 20px">
+            <a class="nav-bar" href="/libraries">Библиотеки</a>
+            <a class="nav-bar" href="/books" style="border-style: solid; border-color: black; border-radius: 10px; color: black">Книги</a>
+            <a class="nav-bar" href="/readingrooms">Читални</a>
+            <a class="nav-bar" style="margin-left: 30%" href="#">Најава</a>
+        </div>
+    </div>
+</nav>
+
+
+<div class="container mb-4" >
+    <div class="row">
+    <div class="table-responsive">
+        <table class="table table-striped" style="color: white">
+            <thead>
+            <tr>
+                <th scope="col">Book name</th>
+                <th scope="col">Author</th>
+               <!-- <th scope="col">Manufacturer</th>
+                <th scope="col">Category</th>-->
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="book : ${books}">
+                <td >  <a th:href="@{'/books/{id}' (id=${book.getId()})}"><span  th:text="${book.getName()}" ></span></a></td>
+                <td th:text="${book.getAuthorName()}"></td>
+                <!--<td th:text="${product.getManufacturer() != null}
+                            ? ${product.getManufacturer().getName()} : 'No Manufacturer'"></td>
+                <td th:text="${product.getCategory() != null}
+                            ? ${product.getCategory().getName()} : 'No Category'"></td>
+                <td class="text-right">
+                    <form th:action="@{'/products/delete/{id}' (id=${product.getId()})}" th:method="DELETE">
+                        <button type="submit" class="btn btn-sm btn-danger"><i class="fa fa-trash">Delete</i></button>
+                    </form>
+                    <a th:href="@{'/products/edit-form/{id}' (id=${product.getId()})}" class="btn btn-sm btn-info"><i class="fa fa-trash">Edit</i></a>
+                    <form th:action="@{'/shopping-cart/add-product/{id}' (id=${product.getId()})}" th:method="POST">
+                        <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-trash">Add product to cart</i></button>
+                    </form>
+                </td>-->
+            </tr>
+            </tbody>
+        </table>
+        </div>
+    </div>
+
+
+
+
+
+    <!--<div style="color: white; padding-bottom: 5%; font-size: 20px">ФАКУЛТЕТ ЗА ИНФОРМАТИЧКИ НАУКИ И КОМПЈУТЕРКСКО ИНЖЕНЕРСТВО - СКОПЈЕ</div>
+    <div style="color: white; font-size: 65px">ПАТОТ ДО НАЈБЛИСКА БИБЛИОТЕКА</div>-->
+</div>
+</body>
+</html>

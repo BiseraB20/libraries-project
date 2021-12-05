@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Selected Book</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+    <style>
+        body{
+            font-family: Arial;
+            margin-top: 2%;
+            background-image: url(../images/pozadina.jpg);
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: 100% 100%;
+        }
+        .nav-bar{
+            font-size: 23px;
+            padding: 10px;
+            color: white;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+
+<nav >
+    <div style="display: inline-block; width: 100%">
+        <div>
+            <a href="/home" style="margin-left: 2%; float: left"><img style="border-radius: 10px" src="..\images\logoLink.jpg"></a>
+        </div>
+        <!-- na taa strana sto e selektirana   border-style: solid; border-color: black-->
+        <div style=" float: right; background-color: grey; padding: 2%; width: 50%; margin-right: 5%; border-radius: 20px">
+            <a class="nav-bar" href="/libraries">Библиотеки</a>
+            <a class="nav-bar" href="/books">Книги</a>
+            <a class="nav-bar" href="/readingrooms">Читални</a>
+            <a class="nav-bar" style="margin-left: 30%" href="#">Најава</a>
+        </div>
+    </div>
+</nav>
+
+
+
+
+<div style="display: inline-flex; width: 80%;  margin-left: 10%; margin-top: 2%">
+    <div style=" width: 55%; color: white; border-style: solid; border-color: white; padding: 20px; border-width: 12px; border-radius: 20px">
+        <div>
+            <div>
+                <h3 th:text="${book.getName()}"></h3>
+
+            </div>
+            <div style="float: right; border-style: solid; border-radius: 20px; border-color: green; padding: 2%; text-align: center;">
+                <a style="margin-bottom: 10px">СЛОБОДНИ КНИГИ</a><br/>
+                <div style="color: green;" th:text="${book.getCounter()}"></div>
+            </div>
+        </div>
+        <div style=" margin-top: 20%">
+            <div style="width: 40%; text-align: center; font-size: 24px">
+                <a>Автор</a><br/>
+                <div th:text="${book.getAuthorName()}"></div>
+            </div>
+            <br/>
+            <div style="margin-top: 10%; width: 100%;  text-align: center; font-size: 24px">
+                <a>Опис</a><br/>
+                <div th:text="${book.getDescription()}"></div>
+            </div>
+        </div>
+    </div>
+
+    <div style="margin-left: 2%">
+        <h3 style="color: white">Достапна во следните билиотеки: </h3>
+        <ul>
+           <li th:each="lib : ${book.getLibraries()}" style="color: white">
+               <!--<th:block th:text="${lib.getName()}"></th:block>-->
+               <a th:href="@{'/libraries/{id}' (id=${lib.getId()})}"><span  th:text="${lib.getName()}" ></span></a>
+           </li>
+        </ul>
+    </div>
+</div>
+
+
+
+
+</body>
+</html>
