@@ -1,0 +1,131 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Најава</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+    <style>
+
+        body
+        {
+            font-family: Arial;
+            margin-top: 2%;
+            background-image: url(images/pozadina.jpg);
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: 100% 100%;
+
+            margin: 0;
+            padding: 0;
+
+            font-family: 'Arial';
+        }
+        .nav-bar{
+            font-size: 23px;
+            padding: 10px;
+            color: white;
+            text-decoration: none;
+        }
+
+
+        .login{
+            width: 382px;
+            overflow: hidden;
+            margin: auto;
+            padding: 80px;
+
+            border-radius: 15px ;
+
+        }
+        h2{
+           /* text-align: center;*/
+
+            padding: 20px;
+        }
+        label{
+            color: #ffffff;
+            font-size: 17px;
+        }
+
+        #username{
+            width: 300px;
+            height: 30px;
+            border: none;
+            border-radius: 3px;
+            padding-left: 8px;
+            margin-right: 10px;
+        }
+
+        #password{
+            width: 300px;
+            height: 30px;
+            border: none;
+            border-radius: 3px;
+            padding-left: 8px;
+
+        }
+        .log{
+            width: 300px;
+            height: 30px;
+            border: none;
+            border-radius: 17px;
+            padding-left: 7px;
+            color: black;
+            text-decoration-color: #110606;
+
+
+        }
+        .back{
+            width: 300px;
+            height: 30px;
+            border: none;
+            border-radius: 17px;
+            padding-left: 7px;
+            color: black;
+        }
+        span{
+            color: #110606;
+            font-size: 17px;
+        }
+
+    </style>
+</head>
+<body>
+<div class="container" style="color: white">
+    <div class="row">
+
+        <div class="login">
+            <h2  style="color: white; text-align: center;margin-left: 45px; border: white solid; border-radius: 10px;">Најава</h2>
+            <br/>
+            <form th:method="POST" id="login" th:action="@{/login}">
+
+                <label for="username">Корисничко име:</label>
+                <input type="text" id="username" name="username" placeholder="Внесете го корисничкото име" class="form-control" required=""
+                       autofocus="">
+                <br/>
+
+                <label for="password">Лозинка:</label>
+                <input  type="password" id="password" name="password" placeholder="Внесето ја лозинката" required="">
+
+                <br/>
+
+                <div th:if="${hasError}" class="error">
+                    <div th:text="${error}"></div>
+                </div>
+                <br/>
+
+                <input type="submit" class="log" th:value="Најава">
+                <br/>
+                <br/>
+                <a class="btn btn-primary back" href="/home">Назад</a>
+            </form>
+        </div>
+
+    </div>
+</div>
+
+</body>
+</html>

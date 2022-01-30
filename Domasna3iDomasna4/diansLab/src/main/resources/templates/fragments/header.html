@@ -1,0 +1,21 @@
+
+<div xmlns:th="http://www.thymeleaf.org">
+
+<nav>
+
+    <div style="display: inline-block; width: 100%">
+        <div>
+            <a href="/home" style="margin-left: 2%; float: left"><img style="border-radius: 10px" src="images\logoLink.jpg"></a>
+        </div>
+
+        <div style=" float: right; background-color: grey; padding: 2%; width: 65%; margin-right: 5%; border-radius: 20px">
+            <a class="nav-bar" href="/libraries" th:classappend="${#strings.equals(#httpServletRequest.getRequestURI(),'/libraries')} ? active : ''">Библиотеки</a>
+            <a class="nav-bar" href="/books" th:classappend="${#strings.equals(#httpServletRequest.getRequestURI(),'/books')} ? active : ''">Книги</a>
+            <a class="nav-bar" href="/readingrooms" th:classappend="${#strings.equals(#httpServletRequest.getRequestURI(),'/readingrooms')} ? active : ''" >Читални</a>
+            <a th:if="${isLoggedIn == true}" class="nav-bar" href="/user">МојаСтрана</a>
+            <a th:if="${isLoggedIn == false}" class="nav-bar" style="margin-left: 30%" href="/login">Најава</a>
+            <a th:if="${isLoggedIn == true}" class="nav-bar" style="margin-left: 30%" href="/logout">Одјава</a>
+        </div>
+    </div>
+</nav>
+</div>
