@@ -1,20 +1,37 @@
 version: "3"
+
 services:
-  #  Create a service named db.
-  wp-db:
-    #   Use the Docker Image postgres. This will pull the newest release.
+  postgres:
     image: "postgres"
-    #   Give the container the name my_postgres. You can changes to something else.
-    container_name: "wp2020_eshop"
-    #   Setup the username, password, and database name. You can changes these values.
+    container_name: "postgres"
+    healthcheck:
+      test: [ "CMD", "pg_isready", "-q", "-d", "postgres", "-U", "postgres" ]
+      timeout: 45s
+      interval: 10s
+      retries: 10
+    restart: always
     environment:
       - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=123
-      - POSTGRES_DB=diansLabData
-    #   Maps port 54320 (localhost) to port 5432 on the container. You can change the ports to fix your needs.
+      - POSTGRES_PASSWORD=bazi2021
+      - POSTGRES_DB=postgres
+    volumes:
+      - ./db:/docker-entrypoint-initdb.d/
     ports:
       - "5432:5432"
-    #   Set a volume some that database is not lost after shutting down the container.
-    #   I used the name postgres-data but you can changed it to something else.
-    volumes:
-      - ./postgres-data:/var/lib/postgresql/data
+  dianslab:
+    depends_on:
+      - postgres
+    image: dianslab.jar
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/postgres
+      SPRING_DATASOURCE_DB: postgres
+    ports:
+      - "9091:9091"
+  prometheus:
+    image: prom/prometheus
+    ports:
+      - "9090:9090"
+    command: --web.enable-lifecycle  --config.file=/etc/prometheus/prometheus.yml
