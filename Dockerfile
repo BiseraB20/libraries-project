@@ -1,4 +1,4 @@
 FROM openjdk:17-alpine
 EXPOSE 8080
-COPY docker-demo.jar dockerdemo.jar
+COPY diansLab-0.0.1-SNAPSHOT.jar dockerdemo.jar
 ENTRYPOINT ["java","-jar","dockerdemo.jar"]
