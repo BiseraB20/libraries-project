@@ -1,7 +1,7 @@
-FROM java:8
+FROM openjdk:17-alpine
 
 EXPOSE 8080
 
-ADD target/docker-demo.jar docker-demo.jar
+COPY target/docker-demo.jar dockerdemo.jar
 
-ENTRYPOINT ["java","-jar","docker-demo.jar"]
+ENTRYPOINT ["java","-jar","dockerdemo.jar"]

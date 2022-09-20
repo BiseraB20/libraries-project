@@ -2,7 +2,7 @@ version: "3"
 
 services:
   postgres:
-    image: "postgres"
+    image: "postgres:latest"
     container_name: "postgres"
     healthcheck:
       test: [ "CMD", "pg_isready", "-q", "-d", "postgres", "-U", "postgres" ]
@@ -13,23 +13,27 @@ services:
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=bazi2021
-      - POSTGRES_DB=postgres
+      - POSTGRES_DB=libraries_db
     volumes:
       - ./db:/docker-entrypoint-initdb.d/
+    expose:
+      - 5432
     ports:
       - "5432:5432"
   dianslab:
     depends_on:
       - postgres
-    image: dianslab.jar
+    image: dockerdemo.jar
     build:
       context: ./
       dockerfile: Dockerfile
     environment:
-      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/postgres
-      SPRING_DATASOURCE_DB: postgres
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/libraries_db
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=bazi2021
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
     ports:
-      - "9091:9091"
+      - "8080:8080"
   prometheus:
     image: prom/prometheus
     ports:
